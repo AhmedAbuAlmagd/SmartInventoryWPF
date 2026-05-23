@@ -62,6 +62,13 @@ The system follows a clean, 4-layer architecture:
    - Set `POSDesktopSystem.Presentation` as the Startup Project.
    - Build and Run (F5).
 
+## 🔑 Seeded Credentials
+
+The system comes with pre-seeded users for testing:
+
+- **Manager**: `manager` / `Manager@123`
+- **Cashier**: `cashier` / `Cashier@123`
+
 ## 📝 Logging & Diagnostics
 Logs are automatically generated for all critical business actions and system errors.
 - **File Location**: `%AppData%/Roaming/POSDesktopSystem/logs/`
