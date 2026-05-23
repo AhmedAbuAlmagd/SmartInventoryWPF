@@ -1,0 +1,130 @@
+<Window x:Class="POSDesktopSystem.Presentation.Views.Products.ProductFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Title="Product" Height="620" Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Border Background="{DynamicResource PrimaryBackgroundColor}" 
+            CornerRadius="16" 
+            BorderThickness="1" 
+            BorderBrush="{DynamicResource BorderColor}"
+            Margin="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.2"/>
+        </Border.Effect>
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Text="Product Details" Style="{DynamicResource Heading1}" Foreground="{DynamicResource AccentColor}" Margin="0 0 0 25"/>
+
+            <!-- Form Fields -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0 -10 0" Padding="0 0 10 0">
+                <StackPanel>
+                    <!-- Name -->
+                    <TextBlock Text="Product Name *" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                    <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Enter product name..."
+                             Margin="0 0 0 20"/>
+
+                    <!-- Barcode -->
+                    <TextBlock Text="Barcode *" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                    <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                             Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Scan or enter barcode..."
+                             Margin="0 0 0 20"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="Description" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                    <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                             Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Additional details..."
+                             Height="80" TextWrapping="Wrap" AcceptsReturn="True"
+                             VerticalContentAlignment="Top" Padding="15 10"
+                             Margin="0 0 0 20"/>
+
+                    <!-- Price / Cost Price -->
+                    <Grid Margin="0 0 0 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Selling Price (EGP) *" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                            <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:N2}'}"
+                                     Tag="0.00"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Cost Price (EGP) *" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                            <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                                     Text="{Binding CostPrice, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:N2}'}"
+                                     Tag="0.00"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Stock / Category -->
+                    <Grid Margin="0 0 0 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Stock Quantity *" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                            <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                                     Text="{Binding StockQuantity, UpdateSourceTrigger=PropertyChanged}"
+                                     Tag="0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Category" Style="{DynamicResource LabelStyle}" Margin="0 0 0 8"/>
+                            <TextBox Style="{DynamicResource InputTextBoxStyle}"
+                                     Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}"
+                                     Tag="Select or type..."/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Status -->
+                    <Border Background="{DynamicResource TertiaryBackgroundColor}" CornerRadius="8" Padding="15 10" Margin="0 0 0 10">
+                        <CheckBox Content="Product is active and available for sale" 
+                                  Foreground="{DynamicResource PrimaryTextColor}"
+                                  IsChecked="{Binding IsActive}" 
+                                  FontSize="13" FontWeight="SemiBold"/>
+                    </Border>
+
+                    <!-- Error -->
+                    <TextBlock Text="{Binding ErrorMessage}" 
+                               Foreground="{DynamicResource ErrorColor}"
+                               FontSize="12"
+                               TextWrapping="Wrap" 
+                               Margin="0 10 0 0"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 30 0 0">
+                <Button Content="CANCEL" 
+                        Width="120"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Command="{Binding CancelCommand}" 
+                        Margin="0 0 15 0"/>
+                <Button Content="SAVE PRODUCT" 
+                        Width="180"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

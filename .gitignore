@@ -1,0 +1,70 @@
+## .NET / WPF GitIgnore
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]est[Rr]esults/
+
+# IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+*.userosscache
+.idea/
+*.swp
+*.lp
+*.user
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sql
+*.mdf
+*.ldf
+
+# Serilog / Local logs
+*.log
+logs/
+Log/
+build_diagnostic.log
+build_errors.log
+build_errors_utf8.log
+build_log.txt
+infra.log
+pres.log
+pres_final.log
+pres_final_utf8.log
+pres_utf8.log
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Others
+*.bak
+*.tmp
+*.temp
+publish/
+artifacts/
+dist/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono auto generated files
+mono_crash.*
+
+# App Settings (Sensitive data should be in appsettings.local.json)
+appsettings.json
+!appsettings.json
+appsettings.local.json

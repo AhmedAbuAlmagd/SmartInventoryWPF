@@ -1,0 +1,29 @@
+<Window x:Class="POSDesktopSystem.Presentation.Views.Shared.ConfirmDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        MinWidth="400">
+    <Border Background="{DynamicResource PrimaryBackgroundColor}" 
+            CornerRadius="16" 
+            BorderThickness="1" 
+            BorderBrush="{DynamicResource BorderColor}"
+            Margin="20">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.2"/>
+        </Border.Effect>
+        <StackPanel Margin="30">
+            <TextBlock x:Name="TitleText" Text="Confirmation" Style="{DynamicResource Heading1}" Foreground="{DynamicResource AccentColor}" Margin="0 0 0 15"/>
+            <TextBlock x:Name="MessageText" Text="Are you sure you want to proceed?" Style="{DynamicResource BodyText}" TextWrapping="Wrap" MaxWidth="340" Margin="0 0 0 30"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="NoButton" Content="NO, CANCEL" Width="120" Style="{DynamicResource SecondaryButtonStyle}" Click="NoButton_Click" Margin="0 0 15 0"/>
+                <Button x:Name="YesButton" Content="YES, PROCEED" Width="140" Style="{DynamicResource PrimaryButtonStyle}" Click="YesButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

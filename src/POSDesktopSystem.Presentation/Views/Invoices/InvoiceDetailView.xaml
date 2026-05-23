@@ -1,0 +1,108 @@
+<Window x:Class="POSDesktopSystem.Presentation.Views.Invoices.InvoiceDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:POSDesktopSystem.Presentation.Views.Invoices"
+        xmlns:vm="clr-namespace:POSDesktopSystem.Presentation.ViewModels.Invoices"
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterOwner"
+        Title="Invoice Details" Height="600" Width="800"
+        Background="{DynamicResource PrimaryBackgroundColor}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="Invoice Details"
+                   Style="{DynamicResource Heading1}"
+                   Foreground="{DynamicResource AccentColor}"
+                   Margin="0 0 0 20"/>
+
+        <!-- Invoice Details -->
+        <Border Grid.Row="1" Background="White" CornerRadius="12" Padding="20" BorderThickness="1" BorderBrush="{DynamicResource BorderColor}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0 0 0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="INVOICE INFORMATION" Style="{DynamicResource LabelStyle}" Margin="0 0 0 10"/>
+                        <TextBlock Style="{DynamicResource BodyText}" Margin="0 0 0 5">
+                            <Run Text="Invoice #: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.InvoiceNumber}"/>
+                        </TextBlock>
+                        <TextBlock Style="{DynamicResource BodyText}" Margin="0 0 0 5">
+                            <Run Text="Date: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.InvoiceDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
+                        </TextBlock>
+                        <TextBlock Style="{DynamicResource BodyText}">
+                            <Run Text="Cashier: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.CashierName}"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock Text="PAYMENT SUMMARY" Style="{DynamicResource LabelStyle}" HorizontalAlignment="Right" Margin="0 0 0 10"/>
+                        <TextBlock Style="{DynamicResource BodyText}" HorizontalAlignment="Right" Margin="0 0 0 5">
+                            <Run Text="Status: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.Status}"/>
+                        </TextBlock>
+                        <TextBlock Style="{DynamicResource BodyText}" HorizontalAlignment="Right" Margin="0 0 0 5">
+                            <Run Text="Total Amount: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.TotalAmount, StringFormat='{}{0:N2}'}"/>
+                        </TextBlock>
+                        <TextBlock Style="{DynamicResource BodyText}" HorizontalAlignment="Right">
+                            <Run Text="Payment Method: " FontWeight="Bold"/>
+                            <Run Text="{Binding Invoice.PaymentMethod}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid Grid.Row="1" 
+                          Style="{DynamicResource BaseDataGridStyle}"
+                          ItemsSource="{Binding Invoice.Items}"
+                          BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="PRODUCT" Binding="{Binding ProductName}" Width="*"/>
+                        <DataGridTextColumn Header="QTY" Binding="{Binding Quantity}" Width="100"/>
+                        <DataGridTextColumn Header="PRICE" Binding="{Binding UnitPrice, StringFormat='{}{0:N2}'}" Width="120"/>
+                        <DataGridTextColumn Header="SUBTOTAL" Binding="{Binding LineTotal, StringFormat='{}{0:N2}'}" Width="120">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+            <Button Content="PRINT RECEIPT"
+                    Width="160"
+                    Style="{DynamicResource PrimaryButtonStyle}"
+                    Command="{Binding PrintCommand}"
+                    Margin="0 0 10 0"/>
+            <Button Content="CLOSE"
+                    Width="120"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+                    Command="{Binding CloseCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
